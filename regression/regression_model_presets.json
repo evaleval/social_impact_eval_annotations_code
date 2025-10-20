@@ -1,0 +1,259 @@
+{
+  "defaults": {
+    "data_dir": "data",
+    "output_root": "airflow_outputs",
+    "backend": "numpyro",
+    "cores": 8,
+    "chain_pool": "pymc_chains"
+  },
+  "models": [
+    {
+      "name": "model_1_linear",
+      "description": "Baseline model with linear year trend and independent slopes.",
+      "build_kwargs": {
+        "intercept_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slopes": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slope_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "lkj_eta": 3.0,
+        "sd_reg_int": 0.5,
+        "sd_cty_dev": 0.2,
+        "sd_prov_dev": 0.1,
+        "sd_fp_int": 0.2,
+        "sd_sigma": 0.2,
+        "pop_slope_corr": false,
+        "year_mode": "linear",
+        "sd_year": 0.25
+      },
+      "sample_kwargs": {
+        "draws": 3000,
+        "tune": 3000,
+        "chains": 8,
+        "target_accept": 0.99,
+        "max_treedepth": 12
+      }
+    },
+    {
+      "name": "model_2_linear_provider_corr",
+      "description": "Linear year trend with correlated provider intercepts.",
+      "build_kwargs": {
+        "intercept_corr": {
+          "region": false,
+          "country": false,
+          "provider": true,
+          "firstparty": false
+        },
+        "slopes": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slope_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "lkj_eta": 3.0,
+        "sd_reg_int": 0.5,
+        "sd_cty_dev": 0.2,
+        "sd_prov_dev": 0.1,
+        "sd_fp_int": 0.2,
+        "sd_sigma": 0.2,
+        "pop_slope_corr": false,
+        "year_mode": "linear",
+        "sd_year": 0.25
+      },
+      "sample_kwargs": {
+        "draws": 3000,
+        "tune": 3000,
+        "chains": 8,
+        "target_accept": 0.99,
+        "max_treedepth": 12
+      }
+    },
+    {
+      "name": "model_3_spline",
+      "description": "Spline year effect with independent population slopes.",
+      "build_kwargs": {
+        "intercept_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slopes": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slope_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "lkj_eta": 5.0,
+        "sd_reg_int": 0.5,
+        "sd_cty_dev": 0.2,
+        "sd_prov_dev": 0.1,
+        "sd_fp_int": 0.2,
+        "sd_sigma": 0.2,
+        "pop_slope_corr": false,
+        "year_mode": "spline",
+        "sd_year": 0.25,
+        "spline_df": 12,
+        "spline_degree": 3
+      },
+      "sample_kwargs": {
+        "draws": 3000,
+        "tune": 3000,
+        "chains": 8,
+        "target_accept": 0.99,
+        "max_treedepth": 12
+      }
+    },
+    {
+      "name": "model_4_spline_corr_slopes",
+      "description": "Spline year effect with correlated population slopes.",
+      "build_kwargs": {
+        "intercept_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slopes": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slope_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "lkj_eta": 5.0,
+        "sd_reg_int": 0.5,
+        "sd_cty_dev": 0.2,
+        "sd_prov_dev": 0.1,
+        "sd_fp_int": 0.2,
+        "sd_sigma": 0.2,
+        "pop_slope_corr": true,
+        "year_mode": "spline",
+        "sd_year": 0.25,
+        "spline_df": 12,
+        "spline_degree": 3
+      },
+      "sample_kwargs": {
+        "draws": 3000,
+        "tune": 3000,
+        "chains": 8,
+        "target_accept": 0.99,
+        "max_treedepth": 12
+      }
+    },
+    {
+      "name": "model_5_spline_stronger_priors",
+      "description": "Spline year effect with broader hierarchy priors and correlated slopes.",
+      "build_kwargs": {
+        "intercept_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slopes": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slope_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "lkj_eta": 6.0,
+        "sd_reg_int": 0.4,
+        "sd_cty_dev": 0.4,
+        "sd_prov_dev": 0.4,
+        "sd_fp_int": 0.4,
+        "sd_sigma": 1.0,
+        "pop_slope_corr": true,
+        "year_mode": "spline",
+        "sd_year": 0.25,
+        "spline_df": 12,
+        "spline_degree": 5
+      },
+      "sample_kwargs": {
+        "draws": 3000,
+        "tune": 3000,
+        "chains": 8,
+        "target_accept": 0.99,
+        "max_treedepth": 12
+      }
+    },
+    {
+      "name": "model_6_gp_year",
+      "description": "Gaussian-process year effect with the broader hierarchy priors.",
+      "build_kwargs": {
+        "intercept_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slopes": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "slope_corr": {
+          "region": false,
+          "country": false,
+          "provider": false,
+          "firstparty": false
+        },
+        "lkj_eta": 6.0,
+        "sd_reg_int": 0.4,
+        "sd_cty_dev": 0.4,
+        "sd_prov_dev": 0.4,
+        "sd_fp_int": 0.4,
+        "sd_sigma": 1.0,
+        "pop_slope_corr": true,
+        "year_mode": "gp",
+        "sd_year": 0.25,
+        "gp_jitter": 1e-06,
+        "gp_shared_hypers": true
+      },
+      "sample_kwargs": {
+        "draws": 3000,
+        "tune": 3000,
+        "chains": 8,
+        "target_accept": 0.99,
+        "max_treedepth": 12
+      }
+    }
+  ]
+}
