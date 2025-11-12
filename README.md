@@ -1,2 +1,1 @@
-# wmwm_code
-Code for the paper: "Who Measures What Matters? An Analysis of Social Impact Evaluations in Foundation Model Reporting"
+Code for the paper: "Who Evaluates AI's Social Impacts? Mapping Coverage and Gaps in First and Third Party Evaluations"
